@@ -1,7 +1,7 @@
 import { ProductsRepository } from "@/application/protocols/database/products-repository"
 import { ICreateProductUseCase } from "@/domain/use-cases/products"
 
-import { PriceLessThanZero } from "@/application/errors/errors/price-less-than-zero-error"
+import { PriceLessThanZero } from "@/application/errors/errors"
 
 export class CreateProductUseCase implements ICreateProductUseCase {
   constructor (

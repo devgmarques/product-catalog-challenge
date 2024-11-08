@@ -1,7 +1,7 @@
 import { UsersRepository } from "@/application/protocols/database"
 import { HashRepository } from "@/application/protocols/crypto"
 
-import { InvalidCredentialError, UserNotExistError } from "@/application/errors/errors"
+import { InvalidCredentialError, NotExistError } from "@/application/errors/errors"
 
 import { IAuthenticateUserUseCase } from "@/domain/use-cases/users"
 
@@ -18,7 +18,7 @@ export class AuthenticateUserUseCase implements IAuthenticateUserUseCase {
     })
 
     if (!user) {
-      throw new UserNotExistError()
+      throw new NotExistError("User")
     }
 
     const comparePasswordHash = await this.hashRepository.compare({

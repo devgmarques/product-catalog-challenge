@@ -5,7 +5,7 @@ import { AuthenticateUserUseCase } from "./authenticate-user"
 import { HashRepository } from "@/application/protocols/crypto"
 import { UsersRepository } from "@/application/protocols/database"
 
-import { InvalidCredentialError, UserNotExistError } from "@/application/errors/errors"
+import { InvalidCredentialError, NotExistError } from "@/application/errors/errors"
 
 import { InMemoryHashRepository } from "@/infra/crypto/in-memory"
 import { InMemoryUsersRepository } from "@/infra/database/in-memory"
@@ -64,7 +64,7 @@ describe("authenticate user use case", () => {
     expect(() => sut.execute({
       email: "email",
       password: "password",
-    })).rejects.toBeInstanceOf(UserNotExistError)
+    })).rejects.toBeInstanceOf(NotExistError)
   })
 
   it("should be able to call compare hash repository with correct values", async () => {

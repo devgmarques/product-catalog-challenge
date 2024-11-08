@@ -5,7 +5,7 @@ import { ICreateProductUseCase } from '@/domain/use-cases/products'
 
 import { InMemoryProductsRepository } from '@/infra/database/in-memory'
 import { CreateProductUseCase } from './create-product'
-import { PriceLessThanZero } from '@/application/errors/errors/price-less-than-zero-error'
+import { PriceLessThanZero } from '@/application/errors/errors'
 
 let productsRepository: ProductsRepository
 let sut: ICreateProductUseCase
