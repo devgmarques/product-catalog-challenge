@@ -1,5 +1,3 @@
-import { Catalog } from "@/domain/entities"
-
 export interface IDeleteCatalogUseCase {
   execute(input: IDeleteCatalogUseCase.Input): IDeleteCatalogUseCase.Output
 }
