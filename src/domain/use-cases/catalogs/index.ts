@@ -1,0 +1,5 @@
+export * from './i-create-catalog'
+export * from './i-create-product-to-catalog'
+export * from './i-delete-catalog'
+export * from './i-fetch-catalog'
+export * from './i-update-catalog'
