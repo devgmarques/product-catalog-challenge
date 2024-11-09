@@ -5,7 +5,7 @@ export type ProductsRepository = {
   findById(input: ProductsRepository.FindById.Input): ProductsRepository.FindById.Output
   delete(input: ProductsRepository.Delete.Input): ProductsRepository.Delete.Output
   update(input: ProductsRepository.Update.Input): ProductsRepository.Update.Output
-  fetch(input: ProductsRepository.Fetch.Input): ProductsRepository.Fetch.Output
+  fetch(): ProductsRepository.Fetch.Output
 }
 
 export namespace ProductsRepository {
@@ -50,8 +50,6 @@ export namespace ProductsRepository {
   }
 
   export namespace Fetch {
-    export type Input = null
-
     export type Output = Promise<Product[]>
   }
 }
