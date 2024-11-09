@@ -8,7 +8,7 @@ export namespace ICreateProductToCatalogUseCase {
   export type Input = {
     catalogId: string
     userId: string
-    product: Product
+    productId: string
   }
 
   export type Output = Promise<Catalog>

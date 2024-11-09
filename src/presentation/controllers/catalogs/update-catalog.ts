@@ -24,7 +24,7 @@ export class UpdateCatalogController {
       } = updateCatalogBody.parse(request.body)
       const {
         catalogId
-      } = updateCatalogParams.parse(request.body)
+      } = updateCatalogParams.parse(request.params)
 
       const result = await this.updateCatalogUseCase.execute({
         catalogId,

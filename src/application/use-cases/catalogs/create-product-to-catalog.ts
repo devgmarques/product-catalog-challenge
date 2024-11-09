@@ -19,7 +19,7 @@ export class CreateProductToCatalogUseCase implements ICreateProductToCatalogUse
     } 
 
     const productExist = await this.productsRepository.findById({
-      productId: input.product.productId
+      productId: input.productId
     })
 
     if(!productExist) {
@@ -29,13 +29,13 @@ export class CreateProductToCatalogUseCase implements ICreateProductToCatalogUse
     const catalog = await this.catalogsRepository.createProductToCatalog({
       catalogId: input.catalogId,
       product: {
-        productId: input.product.productId,
-        name: input.product.name,
-        description: input.product.description,
-        amountStock: input.product.amountStock,
-        catalogs: input.product.catalogs,
-        price: input.product.price,
-        createdAt: input.product.createdAt,
+        productId: productExist.productId,
+        name: productExist.name,
+        description: productExist.description,
+        amountStock: productExist.amountStock,
+        catalogs: productExist.catalogs,
+        price: productExist.price,
+        createdAt: productExist.createdAt,
       }
     })
 
