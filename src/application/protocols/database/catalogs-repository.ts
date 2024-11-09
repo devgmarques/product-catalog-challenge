@@ -6,6 +6,7 @@ export type CatalogsRepository = {
   findById(input: CatalogsRepository.FindById.Input): CatalogsRepository.FindById.Output
   update(input: CatalogsRepository.Update.Input): CatalogsRepository.Update.Output
   delete(input: CatalogsRepository.Delete.Input): CatalogsRepository.Delete.Output
+  fetch(input: CatalogsRepository.Fetch.Input): CatalogsRepository.Fetch.Output
 }
 
 export namespace CatalogsRepository {
@@ -60,9 +61,9 @@ export namespace CatalogsRepository {
 
   export namespace Fetch {
     export type Input = {
-      catalogId: string
+      userId: string
     }
 
-    export type Output = Promise<Catalog>
+    export type Output = Promise<Catalog[]>
   }
 }

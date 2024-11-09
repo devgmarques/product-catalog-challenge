@@ -51,7 +51,7 @@ describe("update catalog use case", () => {
     
     expect(catalogsRepositorySpy).toHaveBeenCalledWith({
       catalogId: "catalogId-01",
-      userIdj: "userId-01",
+      userId: "userId-01",
     })
   })
 

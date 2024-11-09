@@ -72,4 +72,10 @@ export class InMemoryCatalogsRepository implements CatalogsRepository {
 
     this.database = products
   }
+
+  async fetch(input: CatalogsRepository.Fetch.Input): CatalogsRepository.Fetch.Output {
+    const catalogs = this.database.filter(item => item.userId === input.userId)
+
+    return catalogs
+  }
 }
