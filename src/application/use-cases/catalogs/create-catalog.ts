@@ -7,8 +7,6 @@ export class CreateCatalogUseCase implements ICreateCatalogUseCase {
   ) {}
 
   async execute(input: ICreateCatalogUseCase.Input): ICreateCatalogUseCase.Output {
-    // TODO => fazer alguma regra de negocio
-
     const catalog = await this.catalogsRepository.create({
       userId: input.userId,
       title: input.title,
