@@ -5,6 +5,7 @@ export interface IDeleteCatalogUseCase {
 export namespace IDeleteCatalogUseCase {
   export type Input = {
     catalogId: string
+    userId: string
   }
 
   export type Output = Promise<void>

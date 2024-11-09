@@ -2,19 +2,19 @@ import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 import { CatalogsRepository } from '@/application/protocols/database'
 
-import { IUpdateCatalogUseCase } from '@/domain/use-cases/catalogs'
+import { IDeleteCatalogUseCase } from '@/domain/use-cases/catalogs'
 import { InMemoryCatalogsRepository } from '@/infra/database/in-memory'
 
-import { UpdateCatalogUseCase } from './update-catalog'
+import { DeleteCatalogUseCase } from './delete-catalog'
 import { NotExistError } from '@/application/errors/errors'
 
 let catalogsRepository: CatalogsRepository
-let sut: IUpdateCatalogUseCase
+let sut: IDeleteCatalogUseCase
 
-describe("update catalog use case", () => {
+describe("delete catalog use case", () => {
   beforeEach(() => {
     catalogsRepository = new InMemoryCatalogsRepository()
-    sut = new UpdateCatalogUseCase(catalogsRepository)
+    sut = new DeleteCatalogUseCase(catalogsRepository)
 
     catalogsRepository.create({
       catalogId: "catalogId-01",
@@ -24,20 +24,13 @@ describe("update catalog use case", () => {
     })
   })
 
-  it("should be able to update catalog with successful", async () => {
+  it("should be able to delete catalog with successful", async () => {
     const catalog = await sut.execute({
       catalogId: "catalogId-01",
       userId: "userId-01",
-      description: "description-updated",
-      title: "title-updated",
     })
 
-    expect(catalog.catalogId).toBe("catalogId-01")
-    expect(catalog.userId).toBe("userId-01")
-    expect(catalog.title).toBe("title-updated")
-    expect(catalog.description).toBe("description-updated")
-    expect(catalog.products).toHaveLength(0)
-    expect(catalog.createdAt).toBeDefined()
+    expect(catalog).toBeUndefined()
   })
 
   it("should be able to call findById catalogsRepository with correct values", async () => {
@@ -46,8 +39,6 @@ describe("update catalog use case", () => {
     await sut.execute({
       catalogId: "catalogId-01",
       userId: "userId-01",
-      description: "description",
-      title: "title",
     })
     
     expect(catalogsRepositorySpy).toHaveBeenCalledWith({
@@ -60,26 +51,20 @@ describe("update catalog use case", () => {
     expect(() => sut.execute({
       catalogId: "not-exists",
       userId: "userId-01",
-      description: "description",
-      title: "title",
     })).rejects.toBeInstanceOf(NotExistError)
   })
 
-  it("should be able to call update catalogsRepository with correct values", async () => {
-    const catalogsRepositorySpy = vitest.spyOn(catalogsRepository, "update")
+  it("should be able to call delete catalogsRepository with correct values", async () => {
+    const catalogsRepositorySpy = vitest.spyOn(catalogsRepository, "delete")
 
     await sut.execute({
       catalogId: "catalogId-01",
       userId: "userId-01",
-      description: "description",
-      title: "title",
     })
     
     expect(catalogsRepositorySpy).toHaveBeenCalledWith({
       catalogId: "catalogId-01",
       userId: "userId-01",
-      description: "description",
-      title: "title",
     })
   })
 })
