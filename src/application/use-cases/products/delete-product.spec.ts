@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
-import { ProductsRepository } from '@/application/protocols/database/products-repository'
+import { ProductsRepository } from '@/application/protocols/database'
 import { IDeleteProductUseCase } from '@/domain/use-cases/products'
 
 import { InMemoryProductsRepository } from '@/infra/database/in-memory'

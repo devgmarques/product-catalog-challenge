@@ -1,4 +1,4 @@
-import { ProductsRepository } from "@/application/protocols/database/products-repository"
+import { ProductsRepository } from "@/application/protocols/database"
 import { ICreateProductUseCase } from "@/domain/use-cases/products"
 
 import { PriceLessThanZero } from "@/application/errors/errors"
