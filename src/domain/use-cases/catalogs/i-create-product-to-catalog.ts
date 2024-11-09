@@ -7,6 +7,7 @@ export interface ICreateProductToCatalogUseCase {
 export namespace ICreateProductToCatalogUseCase {
   export type Input = {
     catalogId: string
+    userId: string
     product: Product
   }
 
