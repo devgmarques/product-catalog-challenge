@@ -1,53 +1,99 @@
-Neste teste, vamos avaliar suas habilidades em desenvolvimento backend usando Node.js, banco de dados MongoDB e PayloadCMS, bem como capacidade de raciocinar, fazer perguntas e desenvoltura como programador. O objetivo é entender sua capacidade de estruturar e desenvolver uma aplicação funcional, além de sua habilidade para justificar as decisões técnicas tomadas e/ou questionar quando for preciso (Acredite sempre será!).
+# Documentação do Catálogo de Produtos
 
-### Objetivo do Teste
-Criar uma API para gerenciar um catálogo de produtos usando Node.js e MongoDB, com a administração dos dados sendo feita via PayloadCMS. A aplicação deve fornecer funcionalidades de CRUD (criação, leitura, atualização e exclusão) para os produtos e autenticação de usuários para proteger determinadas rotas.
+## Sumário
+1. [Introdução](#1-introdução)
+2. [Arquitetura do Projeto](#2-arquitetura-do-projeto)
+   - [Princípios Seguidos](#21-princípios-seguidos)
+3. [Tecnologias Utilizadas](#3-tecnologias-utilizadas)
+4. [Design do Código](#4-design-do-código)
+   - [Use Cases](#41-use-cases)
+   - [Testes Unitários](#42-testes-unitários)
+5. [Como Executar o Projeto](#5-como-executar-o-projeto)
+   - [Pré-requisitos](#51-pré-requisitos)
+   - [Instalação](#52-instalação)
+   - [Execução de Testes](#53-execução-de-testes)
+6. [Rotas da API](#6-rotas-da-api)
+7. [Melhorias e Ideias para Implementação](#7-melhorias-e-ideias-para-implementação)
+8. [Considerações Finais](#8-considerações-finais)
 
-OBS: Caso sinta mais confortável, pode usar apenas o Node.js, mas atente-se pois será necessário fazer o autenticação do zero (O payload já entrega pronto). Essa é uma escolha apenas de conforto pro teste técnico. Aqui dentro se usa o payload no monorepo.
+## 1. **Introdução**
+Este projeto é uma API para um desafio sobre, catálogos de produtos. Com funcionalidades de CRUD e autenticação de usuários. A seguir, detalho as decisões técnicas, tecnologias utilizadas e o processo de desenvolvimento, destacando como as práticas de engenharia de software e padrões arquiteturais foram seguidos.
 
-### Requisitos Técnicos
+## 2. **Arquitetura do Projeto**
+A estrutura do projeto segue a **Clean Architecture**, separando claramente as camadas de domínio, aplicação, infraestrutura e interfaces externas.
 
-1. **Node.js**: Desenvolva a API usando Node.js, estruturando as rotas, middleware e demais funcionalidades com a abordagem que preferir.
-2. **MongoDB**: Use MongoDB para armazenar os dados dos produtos. Organize a estrutura do banco de dados de forma eficiente para consultas e operações de CRUD.
-3. **PayloadCMS**(Opcional): Configure o PayloadCMS como painel administrativo para gerenciar os produtos e usuários. Permita que o CMS autentique e autorize usuários para acessar certas funcionalidades.
-4. **Autenticação**:
-    - Caso opte por criar o sistema de autenticação usando Node.js puro, implemente autenticação JWT para proteger rotas específicas da API, como criação, atualização e exclusão de produtos.
-    - Se preferir utilizar PayloadCMS para a autenticação, configure e use o sistema de autenticação do PayloadCMS para proteger essas rotas.
-5. **Documentação da API**: Documente os endpoints da API, incluindo parâmetros, métodos HTTP, respostas e códigos de status. Fique à vontade para usar ferramentas como Swagger, Postman, Hoppscotch, ApiDog ou até mesmo documentação manual em Markdown.
+### 2.1 **Princípios Seguidos**
+- **SOLID**: Aplicamos os cinco princípios para garantir a escalabilidade e manutenção do código.
+- **KISS**: Mantivemos o código simples e fácil de entender.
+- **DRY**: Evitamos repetição de lógica e código.
+- **Clean Code**: Foco em legibilidade e simplicidade de compreensão.
 
-### Funcionalidades
+## 3. **Tecnologias Utilizadas**
+O projeto back-end foi desenvolvido utilizando as seguintes tecnologias:
+- **Node.js**: Ambiente de execução JavaScript para o back-end.
+- **TypeScript**: Adotamos TypeScript para garantir tipagem estática e maior segurança durante o desenvolvimento.
+- **Prisma**: Usado para a manipulação de banco de dados e mapeamento objeto-relacional (ORM).
+- **MongoDB**: Banco de dados NoSQL para armazenar informações dos produtos e usuários.
+- **Vitest**: Framework de testes utilizado para testes unitários.
+- **Fastify**: Framework para criar a API RESTful.
 
-- **API de Produtos**:
-    - Criação, listagem, atualização e exclusão de produtos.
-    - Cada produto deve conter as seguintes informações: nome, descrição, preço, quantidade em estoque e data de criação.
-- **API de Catálogos**:
-    - Criação, listagem, atualização e exclusão de catálogos.
-    - Cada catálogo deve conter uma lista de produtos.
-    - Ese catálogo pertencerá a um usuário
-- **Autenticação**:
-    - Implemente a autenticação JWT do zero ou use a autenticação do PayloadCMS, conforme sua escolha, para proteger as rotas de criação, atualização e exclusão.
-    - Usuários autenticados devem poder acessar o PayloadCMS para gerenciar os produtos.
-- **Painel Administrativo (PayloadCMS)**:
-    - Configure o PayloadCMS para permitir que usuários administrativos gerenciem os produtos e vejam as informações de produtos cadastrados.
+## 4. **Design do Código**
+### 4.1 **Use Cases**
+Implementamos os **casos de uso** seguindo os princípios da Clean Architecture. Os casos de uso são independentes de detalhes de infraestrutura, facilitando o teste e a manutenção. Cada caso de uso é testado com **testes unitários**, onde utilizamos **repositórios em memória** para simular interações com o banco de dados.
 
-### Critérios de Avaliação
+### 4.2 **Testes Unitários**
+- Os testes unitários foram implementados utilizando **Vitest**. O padrão de testes **spy** foi usado para monitorar interações e garantir o funcionamento correto dos casos de uso.
+- Os repositórios em memória permitiram que os testes fossem executados de forma independente do banco de dados, aumentando a velocidade e confiabilidade dos testes.
 
-1. **Funcionalidade**: Todas as funcionalidades descritas foram implementadas e funcionam conforme esperado.
-2. **Qualidade do Código**: Organização, clareza e práticas recomendadas de desenvolvimento.
-3. **Estrutura do Banco de Dados**: Otimização e organização dos dados no MongoDB.
-4. **Documentação da API**: Clareza e detalhamento dos endpoints da API.
-5. **Boas práticas**: Implementação de boas práticas, especialmente em relação à autenticação e ao acesso ao PayloadCMS.
+## 5. **Como Executar o Projeto**
 
-###  Pontos importantes
+### 5.1 **Pré-requisitos**
+Certifique-se de ter instalado:
+- Node.js
 
-1. Caso não consiga desenvolver alguma parte, não se preocupe. Apenas tente anotar e entender qual foi a dificuldade para não conseguir
-2. Implemente Apenas o que foi Descrito no teste, mas anote para a segunda etapa o que você acredita que seria interessante de regra de negócio para essa aplicação. Caso falte **contexto**, que perguntas você faria pra **entender** mais o **problema**, a aplicação e pra que ela estaria sendo usada
+### 5.2 **Instalação**
 
-### Fundamentação das Decisões Técnicas
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/devgmarques/product-catalog-challenge.git
+   cd product-catalog-challenge
+   ```
 
-É importante que você descreva e justifique as decisões técnicas que tomou ao longo do desenvolvimento. Explique, por exemplo, o motivo da escolha do método de autenticação, estrutura de banco de dados, ou qualquer outro aspecto que considere relevante. Essas justificativas são essenciais para avaliarmos sua capacidade de pensar de forma crítica e fundamentada, um aspecto valioso para decisões futuras e escalabilidade do projeto.
+2. Instale as dependências do projeto:
+   ```bash
+   npm install
+   ```
 
-### Instruções de Envio
+3. Configure o arquivo de ambiente:
+   - Crie um arquivo `.env` com base no `.env.example` e preencha os valores necessários, como a URL do banco de dados e outras variáveis de configuração.
 
-- Submeta o código em um repositório público no GitHub, incluindo um README detalhado com as instruções de configuração e execução.
-- Envie o link do repositório e, se possível, uma URL para testar a API.
+4. Inicie a aplicação:
+   ```bash
+   npm run start:dev
+   ```
+
+### 5.3 **Execução de Testes**
+Para rodar os testes unitários:
+```bash
+npm run test:watch
+```
+
+## 6. **Rotas da API**
+
+A aplicação foi construída utilizando **Fastify** para gerenciar as rotas da API. Todas as rotas seguem o padrão RESTful, com endpoints organizados por recursos. A seguir, apresento o link para documentação com o Postman:
+
+[Link para documentação](https://documenter.getpostman.com/view/33097794/2sAY52dexT)
+
+## 7. **Melhorias e Ideias para Implementação**
+- **Taxonomia e Categorização de Produtos**: Adicionar um sistema de categorias e tags para que os produtos sejam facilmente classificados, melhorando a organização e a navegação.
+
+- **Uploads de Imagens para Produtos**: Implementar upload de imagens para cada produto, armazenando-os em uma solução de armazenamento (como AWS S3 ou Cloudinary) e associando as URLs aos produtos.
+
+- **Sistema de Avaliações e Comentários**: Permitir que os usuários avaliem e comentem os produtos, com um sistema de classificação baseado em estrelas, o que ajudaria a enriquecer o catálogo e gerar engajamento.
+
+- **Teste de Integração e Cobertura Completa de Testes**: Expandir a cobertura de testes unitários e adicionar testes de integração, garantindo que todas as funcionalidades da API estejam completamente testadas e funcionando conforme esperado.
+
+## 8. **Considerações Finais**
+O projeto foi desenvolvido seguindo os bons padrões de arquitetura e design de código, garantindo escalabilidade, facilidade de manutenção e testes robustos.
+
+Feito por Guilherme Henrique Marques.

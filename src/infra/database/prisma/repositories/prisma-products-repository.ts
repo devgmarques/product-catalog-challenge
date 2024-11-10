@@ -30,6 +30,9 @@ export class PrismaProductsRepository implements ProductsRepository {
         description: input.description,
         price: input.price,
         amountStock: input.amountStock
+      },
+      include: {
+        catalogs: true 
       }
     })
 
