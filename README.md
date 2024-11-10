@@ -13,8 +13,12 @@
    - [Instalação](#52-instalação)
    - [Execução de Testes](#53-execução-de-testes)
 6. [Rotas da API](#6-rotas-da-api)
-7. [Melhorias e Ideias para Implementação](#7-melhorias-e-ideias-para-implementação)
-8. [Considerações Finais](#8-considerações-finais)
+7. [Estrutura de Banco de Dados](#7-estrutura-de-banco-de-dados)
+   - [Usuário](#71-usuário)
+   - [Catálogo](#72-catálogo)
+   - [Produto](#73-produto)
+8. [Melhorias e Ideias para Implementação](#8-melhorias-e-ideias-para-implementação)
+9. [Considerações Finais](#9-considerações-finais)
 
 ## 1. **Introdução**
 Este projeto é uma API para um desafio sobre, catálogos de produtos. Com funcionalidades de CRUD e autenticação de usuários. A seguir, detalho as decisões técnicas, tecnologias utilizadas e o processo de desenvolvimento, destacando como as práticas de engenharia de software e padrões arquiteturais foram seguidos.
@@ -84,7 +88,48 @@ A aplicação foi construída utilizando **Fastify** para gerenciar as rotas da 
 
 [Link para documentação](https://documenter.getpostman.com/view/33097794/2sAY52dexT)
 
-## 7. **Melhorias e Ideias para Implementação**
+
+## 7. **Estrutura de Banco de Dados**
+
+A estrutura de dados é gerida no MongoDB, utilizando o Prisma como ORM. Abaixo está a descrição das principais coleções e seus campos.
+
+### 7.1 **Usuário**
+
+| Campo      | Tipo       | Descrição                               |
+|------------|------------|-----------------------------------------|
+| `userId`   | String     | Identificador único do usuário.         |
+| `name`     | String     | Nome do usuário.                        |
+| `email`    | String     | E-mail do usuário.                      |
+| `password` | String     | Senha do usuário.                       |
+| `catalogs` | Relation[] | Relação com os catálogos do usuário.    |
+| `createdAt`| DateTime   | Data de criação do usuário.             |
+
+### 7.2 **Catálogo**
+
+| Campo       | Tipo       | Descrição                                |
+|-------------|------------|------------------------------------------|
+| `catalogId` | String     | Identificador único do catálogo.         |
+| `title`     | String     | Título do catálogo.                      |
+| `description` | String   | Descrição do catálogo.                   |
+| `userId`    | String     | ID do usuário proprietário do catálogo.  |
+| `user`      | Relation   | Relação com o usuário.                   |
+| `productIds`| String[]   | IDs dos produtos associados ao catálogo. |
+| `products`  | Relation[] | Relação com produtos no catálogo.        |
+| `createdAt` | DateTime   | Data de criação do catálogo.             |
+
+### 7.3 **Produto**
+
+| Campo         | Tipo       | Descrição                                   |
+|---------------|------------|---------------------------------------------|
+| `productId`   | String     | Identificador único do produto.             |
+| `name`        | String     | Nome do produto.                            |
+| `description` | String     | Descrição do produto.                       |
+| `price`       | Int        | Preço do produto.                           |
+| `amountStock` | Int        | Quantidade em estoque do produto.           |
+| `catalogIds`  | String[]   | IDs dos catálogos que contêm este produto.  |
+| `catalogs`    | Relation[] | Relação com catálogos associados.           |
+
+## 8. **Melhorias e Ideias para Implementação**
 - **Taxonomia e Categorização de Produtos**: Adicionar um sistema de categorias e tags para que os produtos sejam facilmente classificados, melhorando a organização e a navegação.
 
 - **Uploads de Imagens para Produtos**: Implementar upload de imagens para cada produto, armazenando-os em uma solução de armazenamento (como AWS S3 ou Cloudinary) e associando as URLs aos produtos.
@@ -93,7 +138,8 @@ A aplicação foi construída utilizando **Fastify** para gerenciar as rotas da 
 
 - **Teste de Integração e Cobertura Completa de Testes**: Expandir a cobertura de testes unitários e adicionar testes de integração, garantindo que todas as funcionalidades da API estejam completamente testadas e funcionando conforme esperado.
 
-## 8. **Considerações Finais**
+## 9. **Considerações Finais**
+
 O projeto foi desenvolvido seguindo os bons padrões de arquitetura e design de código, garantindo escalabilidade, facilidade de manutenção e testes robustos.
 
 Feito por Guilherme Henrique Marques.
