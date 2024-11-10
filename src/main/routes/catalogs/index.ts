@@ -8,7 +8,11 @@ import {
   makeUpdateCatalogController
 } from '@/main/factories/catalogs'
 
+import { verifyJwt } from "@/main/middlewares"
+
 export async function routesCatalogs(app: FastifyInstance) {
+  app.addHook("onRequest", verifyJwt)
+
   app.post("/catalogs", (req, res) => makeCreateCatalogController().handle(req, res))
   app.post("/catalogs/:catalogId/:productId", (req, res) => makeCreateProductToCatalogController().handle(req, res))
 
