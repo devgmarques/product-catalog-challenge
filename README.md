@@ -162,9 +162,9 @@ Para rodar os testes unitários:
 npm run test:watch
 ```
 
-
 ## 10. **Considerações Finais**
 
-O projeto foi desenvolvido seguindo os bons padrões de arquitetura e design de código, garantindo escalabilidade, facilidade de manutenção e testes robustos.
+Este projeto foi um desafio gratificante, que me permitiu aplicar e aprofundar conhecimentos em desenvolvimento de software de forma prática. Desde o planejamento até a implementação, tive a oportunidade de superar obstáculos e criar uma solução robusta e funcional. Estou orgulhoso do trabalho realizado e satisfeito com o resultado, que reflete meu comprometimento e dedicação.
+
 
 Feito por Guilherme Henrique Marques.
